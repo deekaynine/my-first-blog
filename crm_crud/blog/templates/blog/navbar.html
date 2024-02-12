@@ -1,10 +1,17 @@
- <header class="page-header">
-      <div class="container">
-                {% if user.is_authenticated %}
-                <a href="{% url 'post_new' %}" class="top-menu">
-                    {% include './icons/file-earmark-plus.svg' %}
-                </a>
-                {% endif %}
-                <h1><a href="/">Blog</a></h1>
-            </div>
-    </header>
+<div class="page-header">
+        {% if user.is_authenticated %}
+
+            <a href="{% url 'post_new' %}" class="top-menu">Add</a>
+            <a href="{% url 'post_draft_list' %}" class="top-menu">Drafts</a>
+            <p class="top-menu">Hello {{ user.username }},<form method="post" action="{% url 'logout' %}">
+    {% csrf_token %}
+    <small>
+        <button  class= 'top-menu' type="submit">logout</button>
+    </small>
+</form></p>
+        {% else %}
+            <a href="{% url 'login' %}" class="top-menu">Login</a>
+        {% endif %}
+        <h1><a href="/">Blog</a></h1>
+    </div>
+    </div>
